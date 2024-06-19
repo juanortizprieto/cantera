@@ -10,4 +10,13 @@ public class Utils {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.parse(birthdate);
     }
+
+    public static boolean isValidDate(String startDate, String endDate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = sdf.parse(startDate);
+        Date date2 = sdf.parse(endDate);
+
+        return date1.before(date2)||date1.equals(date2);
+
+    }
 }

@@ -1,0 +1,20 @@
+create or replace PROCEDURE GET_PAID_AMOUNT (in_employee_id IN VARCHAR2,
+in_start_date IN VARCHAR2,
+in_end_date IN VARCHAR2,
+out_payment OUT NUMBER)
+AS
+v_amount NUMBER;
+BEGIN
+v_amount:=0;
+FOR WH IN(SELECT A.WORKED_HOURS,C.SALARY, a.worked_date 
+FROM EMPLOYEE_WORKED_HOURS A 
+INNER JOIN EMPLOYEES B ON B.ID = A.EMPLOYEE_ID 
+INNER JOIN JOBS C ON C.ID = B.JOB_ID 
+WHERE EMPLOYEE_ID = 11 
+AND WORKED_DATE >=TRUNC(TO_DATE(in_start_date,'YYYY-MM-DD'))
+AND WORKED_DATE <TRUNC(TO_DATE(in_end_date,'YYYY-MM-DD')+1))
+LOOP
+v_amount:= v_amount + (WH.WORKED_HOURS*WH.SALARY);
+END LOOP;
+out_payment := v_amount;
+END GET_PAID_AMOUNT;

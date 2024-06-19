@@ -45,4 +45,22 @@ public class EmployeeResource {
         return employeeService.findByEmployeeIds(requestDto.getEmployeeId());
 
     }
+
+    @POST
+    @Path("/workedHours")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response workedHours(EmployeeRequestDto requestDto){
+
+        return employeeService.workedHours(requestDto);
+
+    }
+
+    @POST
+    @Path("/payment")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response payment(EmployeeRequestDto requestDto){
+
+        return employeeService.payment(requestDto);
+
+    }
 }

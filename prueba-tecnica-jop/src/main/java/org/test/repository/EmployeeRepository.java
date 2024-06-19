@@ -6,10 +6,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureQuery;
 import org.test.dto.EmployeeRequestDto;
-import org.test.utils.Utils;
-
-import java.text.ParseException;
-import java.util.Date;
 
 @ApplicationScoped
 public class EmployeeRepository {
@@ -36,5 +32,38 @@ public class EmployeeRepository {
 
         return (Long) sp.getOutputParameterValue("out_id_employee");
 
+    }
+
+    public double workingHours(Long employeeId, String startDate, String endDate) {
+        StoredProcedureQuery sp = entityManager.createStoredProcedureQuery("JOP.GET_WORKING_HOURS");
+        sp.registerStoredProcedureParameter("in_employee_id",Long.class, ParameterMode.IN);
+        sp.registerStoredProcedureParameter("in_start_date",String.class, ParameterMode.IN);
+        sp.registerStoredProcedureParameter("in_end_date", String.class, ParameterMode.IN);
+        sp.registerStoredProcedureParameter("out_working_hours",Double.class, ParameterMode.OUT);
+
+        sp.setParameter("in_employee_id",employeeId);
+        sp.setParameter("in_start_date",startDate);
+        sp.setParameter("in_end_date", endDate);
+
+        sp.execute();
+
+        return (double) sp.getOutputParameterValue("out_working_hours");
+    }
+
+    public double payment(Long employeeId, String startDate, String endDate) {
+
+        StoredProcedureQuery sp = entityManager.createStoredProcedureQuery("JOP.GET_PAID_AMOUNT");
+        sp.registerStoredProcedureParameter("in_employee_id",Long.class, ParameterMode.IN);
+        sp.registerStoredProcedureParameter("in_start_date",String.class, ParameterMode.IN);
+        sp.registerStoredProcedureParameter("in_end_date", String.class, ParameterMode.IN);
+        sp.registerStoredProcedureParameter("out_payment",Double.class, ParameterMode.OUT);
+
+        sp.setParameter("in_employee_id",employeeId);
+        sp.setParameter("in_start_date",startDate);
+        sp.setParameter("in_end_date", endDate);
+
+        sp.execute();
+
+        return (double) sp.getOutputParameterValue("out_payment");
     }
 }

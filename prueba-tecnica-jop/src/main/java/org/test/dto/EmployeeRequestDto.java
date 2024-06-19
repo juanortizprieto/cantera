@@ -15,6 +15,12 @@ public class EmployeeRequestDto {
     private String lastName;
     @JsonbProperty("birthdate")
     private String birthdate;
+    @JsonbProperty("start_date")
+    private String startDate;
+    @JsonbProperty("end_date")
+    private String endDate;
+    @JsonbProperty("employee_id")
+    private Long employeeId;
 
 
 
@@ -56,5 +62,29 @@ public class EmployeeRequestDto {
 
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 }
